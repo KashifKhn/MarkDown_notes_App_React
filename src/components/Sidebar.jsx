@@ -11,7 +11,7 @@ export default function Sidebar(props) {
             >
                 <h4 className="text-snippet">
                     {
-                        note.body === "" ? `Notes ${index}` : note.body.split(/\r|\n/g)[0]
+                        note.body === "" ? `Notes ${index + 1}` : note.body.split(/\r|\n/g)[0]
                     }
                 </h4>
             </div>
