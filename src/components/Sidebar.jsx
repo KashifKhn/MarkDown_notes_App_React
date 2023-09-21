@@ -14,6 +14,12 @@ export default function Sidebar(props) {
                         note.body === "" ? `Notes ${index + 1}` : note.body.split(/\r|\n/g)[0]
                     }
                 </h4>
+                <button 
+                    className="delete-btn"
+                    onClick={(e) => props.deleteNote(e, note.id)}
+                >
+                    <i className="gg-trash trash-icon"></i>
+                </button>
             </div>
         </div>
     ))
