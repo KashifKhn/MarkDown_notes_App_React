@@ -5,17 +5,15 @@ import Editor from "./components/Editor"
 import { notesCollection } from "./firebase"
 import { db } from "./firebase"
 import Split from "react-split"
-import { nanoid } from "nanoid"
 import { addDoc, deleteDoc, doc, onSnapshot, setDoc } from "firebase/firestore"
 
 export default function App() {
 
   const [notes, setNotes] = useState([]);
-
   const [currentNoteId, setCurrentNoteId] = useState("")
+  const [tempNoteText, setTempNoteText] = useState("");
 
   const currentNote = notes.find(note => note.id === currentNoteId) || notes[0]
-
   const sortedNotes = notes.sort((a, b) => b.updatedAt - a.updatedAt)
 
   useEffect(() => {
@@ -29,6 +27,19 @@ export default function App() {
     })
     return unSubscribe
   }, [])
+
+  useEffect(() => {
+    if (currentNote)
+      setTempNoteText(currentNote.body)
+  }, [currentNote])
+
+  useEffect(() => {
+    const timeOutId = setTimeout(() => {
+      if (tempNoteText !== currentNote.body)
+        updateNote(tempNoteText)
+    }, 500);
+    return () => clearTimeout(timeOutId);
+  }, [tempNoteText])
 
   useEffect(() => {
     if (!currentNoteId) {
@@ -48,9 +59,12 @@ export default function App() {
 
   async function updateNote(text) {
     const docRef = doc(db, 'notes', currentNoteId)
-    await setDoc(docRef,
+    await setDoc(
+      docRef,
       { body: text, updatedAt: Date.now() },
-      { merge: true })
+      { merge: true }
+    )
+
     // setNotes(oldNotes => {
     //   const newArr = []
     //   for (let i = 0; i < oldNotes.length; i++) {
@@ -100,8 +114,8 @@ export default function App() {
               deleteNote={deleteNote}
             />
             <Editor
-              currentNote={currentNote}
-              updateNote={updateNote}
+              tempNoteText={tempNoteText}
+              setTempNoteText={setTempNoteText}
             />
           </Split>
           :
