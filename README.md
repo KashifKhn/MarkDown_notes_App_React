@@ -8,7 +8,8 @@
 
 My Markdown Note-taking App is a simple web application built using ReactMDE, a Markdown editor for React. It allows users to create, edit, and manage Markdown notes. The app includes the following features:
 
-- **Sync Notes with Local Storage:** All your notes are automatically saved and synced with your browser's local storage. This ensures that you never lose your notes, even if you close the app or refresh the page.
+- - **Firebase Integration:** In addition to local storage, we have integrated Firebase to provide a cloud-based storage solution for your notes. This means your notes will be accessible from any device, and you can collaborate with others in real-time. Firebase also ensures the security and durability of your data.
+
 
 - **Add Note Summary Title:** You can add a summary title to each of your notes, making it easier to identify and organize your notes.
 
@@ -52,7 +53,7 @@ Open your web browser and go to `http://localhost:3000` to access the applicatio
 1. **Create a new note:** Click the "New Note" button.
 2. **Edit the note:** Use the Markdown editor to make changes to your note's content.
 3. **Add a summary title:** Optionally, add a summary title to your note to make it easier to identify and organize.
-4. **Save your changes:** Click the "Save" button to save your note. Your changes will be automatically synced with local storage.
+4. **Save your changes:** Click the "Save" button to save your note. Your changes will be automatically synced with Firebase storage.
 5. **Edit an existing note:** To edit an existing note, click on its title in the notes list.
 6. **Delete a note:** To delete a note, click the "Delete" button next to the note in the list.
 
